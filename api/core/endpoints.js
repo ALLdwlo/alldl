@@ -1,6 +1,7 @@
 import cors from "cors";
 import rateLimit from "express-rate-limit";
 import { randomBytes } from "crypto";
+import expressPrometheusMiddleware from "express-prometheus-middleware";
 
 const ipSalt = randomBytes(64).toString('hex');
 
@@ -12,7 +13,7 @@ import stream from "../modules/stream/stream.js";
 import { generateHmac } from "../modules/util/crypto.js";
 import { verifyStream } from "../modules/stream/manage.js";
 
-export function runAPI(express, app, gitCommit, gitBranch, __dirname) {
+export function runAPI(express, app, gitCommit, gitBranch, __dirname) {    
     const corsConfig = process.env.CORS_WILDCARD === '0' ? {
         origin: process.env.CORS_URL,
         optionsSuccessStatus: 200
@@ -58,6 +59,11 @@ export function runAPI(express, app, gitCommit, gitBranch, __dirname) {
     app.use('/api/json', apiLimiter);
     app.use('/api/stream', apiLimiterStream);
     app.use('/api/onDemand', apiLimiter);
+
+    app.use(expressPrometheusMiddleware({
+        metricsApp: app,
+        collectGCMetrics: true
+    }))
 
     app.use((req, res, next) => {
         try { decodeURIComponent(req.path) } catch (e) { return res.redirect('/') }
