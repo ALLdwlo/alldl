@@ -163,7 +163,7 @@ export default async function(host, patternMatch, url, lang, obj) {
                 r = await dailymotion(patternMatch);
                 break;
             case "facebook":
-                r = await facebook(patternMatch);
+                r = await facebook(url.href, patternMatch);
                 break;
             default:
                 return apiJSON(0, { t: errorUnsupported(lang) });

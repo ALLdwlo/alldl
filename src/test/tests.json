@@ -1196,5 +1196,13 @@
             "code": 200,
             "status": "stream"
         }
+    }, {
+        "name": "shared video link",
+        "url": "https://www.facebook.com/share/v/NEf87jbPTvFE8LsL/",
+        "params": {},
+        "expected": {
+            "code": 200,
+            "status": "stream"
+        }
     }]
 }
