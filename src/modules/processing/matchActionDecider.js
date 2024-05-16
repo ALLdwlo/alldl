@@ -64,6 +64,7 @@ export default function(r, host, userFormat, isAudioOnly, lang, isAudioMuted, di
             switch (host) {
                 case "instagram":
                 case "twitter":
+                case "snapchat":
                     params = { picker: r.picker };
                     break;
                 case "douyin":
@@ -121,6 +122,7 @@ export default function(r, host, userFormat, isAudioOnly, lang, isAudioMuted, di
                 case "tumblr":
                 case "pinterest":
                 case "streamable":
+                case "snapchat":
                     responseType = 1;
                     break;
             }
