@@ -24,6 +24,7 @@ import streamable from "./services/streamable.js";
 import twitch from "./services/twitch.js";
 import rutube from "./services/rutube.js";
 import dailymotion from "./services/dailymotion.js";
+import facebook from "./services/facebook.js";
 
 let freebind;
 
@@ -184,6 +185,9 @@ export default async function(host, patternMatch, lang, obj) {
                 break;
             case "dailymotion":
                 r = await dailymotion(patternMatch);
+                break;
+            case "facebook":
+                r = await facebook(url.href, patternMatch);
                 break;
             default:
                 return createResponse("error", {
